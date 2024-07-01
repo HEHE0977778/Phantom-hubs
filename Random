@@ -1,0 +1,244 @@
+-- Create Main GUI
+local MainGUI = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local ToggleButton = Instance.new("ImageButton")
+local SpeedLabel = Instance.new("TextLabel")
+local SpeedSlider = Instance.new("TextBox")
+local JumpLabel = Instance.new("TextLabel")
+local JumpSlider = Instance.new("TextBox")
+local WallHackToggle = Instance.new("TextButton")
+local InfiniteYieldButton = Instance.new("TextButton")
+
+-- Tabs
+local TabFrame = Instance.new("Frame")
+local Tab1Button = Instance.new("TextButton")
+local Tab2Button = Instance.new("TextButton")
+local Tab1 = Instance.new("Frame")
+local Tab2 = Instance.new("Frame")
+
+-- Set properties for Main GUI
+MainGUI.Name = "MainGUI"
+MainGUI.Parent = game.CoreGui
+MainGUI.ResetOnSpawn = false
+
+-- Set properties for Main Frame
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = MainGUI
+MainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+MainFrame.Size = UDim2.new(0, 300, 0, 350)
+MainFrame.Position = UDim2.new(0.5, -150, 0.5, -175)
+MainFrame.Visible = false
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+-- Set properties for Toggle Button
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Parent = MainGUI
+ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+ToggleButton.Position = UDim2.new(0, 0, 0.5, -25)
+ToggleButton.Size = UDim2.new(0, 50, 0, 50)
+ToggleButton.Image = "rbxassetid://YOUR_IMAGE_ID" -- Replace with your image asset ID
+
+-- Animation and Toggle Functionality
+local UIVisible = false
+ToggleButton.MouseButton1Click:Connect(function()
+    UIVisible = not UIVisible
+    if UIVisible then
+        MainFrame:TweenPosition(UDim2.new(0.5, -150, 0.5, -175), "Out", "Sine", 0.5, true)
+    else
+        MainFrame:TweenPosition(UDim2.new(0.5, -150, 1, 0), "In", "Sine", 0.5, true)
+    end
+end)
+
+-- Set properties for Tab Frame
+TabFrame.Name = "TabFrame"
+TabFrame.Parent = MainFrame
+TabFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+TabFrame.Size = UDim2.new(0, 300, 0, 50)
+TabFrame.Position = UDim2.new(0, 0, 0, 0)
+
+-- Set properties for Tab1 Button
+Tab1Button.Name = "Tab1Button"
+Tab1Button.Parent = TabFrame
+Tab1Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Tab1Button.Size = UDim2.new(0, 150, 0, 50)
+Tab1Button.Font = Enum.Font.SourceSans
+Tab1Button.Text = "Main"
+Tab1Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+Tab1Button.TextSize = 20
+
+-- Set properties for Tab2 Button
+Tab2Button.Name = "Tab2Button"
+Tab2Button.Parent = TabFrame
+Tab2Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Tab2Button.Size = UDim2.new(0, 150, 0, 50)
+Tab2Button.Position = UDim2.new(0, 150, 0, 0)
+Tab2Button.Font = Enum.Font.SourceSans
+Tab2Button.Text = "Misc"
+Tab2Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+Tab2Button.TextSize = 20
+
+-- Set properties for Tab1
+Tab1.Name = "Tab1"
+Tab1.Parent = MainFrame
+Tab1.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Tab1.Size = UDim2.new(0, 300, 0, 300)
+Tab1.Position = UDim2.new(0, 0, 0, 50)
+Tab1.Visible = true
+
+-- Set properties for Tab2
+Tab2.Name = "Tab2"
+Tab2.Parent = MainFrame
+Tab2.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Tab2.Size = UDim2.new(0, 300, 0, 300)
+Tab2.Position = UDim2.new(0, 0, 0, 50)
+Tab2.Visible = false
+
+-- Tab Switching Functionality
+Tab1Button.MouseButton1Click:Connect(function()
+    Tab1.Visible = true
+    Tab2.Visible = false
+end)
+
+Tab2Button.MouseButton1Click:Connect(function()
+    Tab1.Visible = false
+    Tab2.Visible = true
+end)
+
+-- Set properties for Speed Label
+SpeedLabel.Name = "SpeedLabel"
+SpeedLabel.Parent = Tab1
+SpeedLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+SpeedLabel.Size = UDim2.new(0, 280, 0, 50)
+SpeedLabel.Position = UDim2.new(0, 10, 0, 10)
+SpeedLabel.Font = Enum.Font.SourceSans
+SpeedLabel.Text = "Walk Speed:"
+SpeedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpeedLabel.TextSize = 20
+
+-- Set properties for Speed Slider
+SpeedSlider.Name = "SpeedSlider"
+SpeedSlider.Parent = Tab1
+SpeedSlider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SpeedSlider.Size = UDim2.new(0, 280, 0, 30)
+SpeedSlider.Position = UDim2.new(0, 10, 0, 60)
+SpeedSlider.Font = Enum.Font.SourceSans
+SpeedSlider.Text = "16"
+SpeedSlider.TextColor3 = Color3.fromRGB(0, 0, 0)
+SpeedSlider.TextSize = 20
+SpeedSlider.ClearTextOnFocus = true
+
+SpeedSlider.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        local speed = tonumber(SpeedSlider.Text)
+        if speed then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+        end
+    end
+end)
+
+-- Set properties for Jump Label
+JumpLabel.Name = "JumpLabel"
+JumpLabel.Parent = Tab1
+JumpLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+JumpLabel.Size = UDim2.new(0, 280, 0, 50)
+JumpLabel.Position = UDim2.new(0, 10, 0, 100)
+JumpLabel.Font = Enum.Font.SourceSans
+JumpLabel.Text = "Jump Power:"
+JumpLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+JumpLabel.TextSize = 20
+
+-- Set properties for Jump Slider
+JumpSlider.Name = "JumpSlider"
+JumpSlider.Parent = Tab1
+JumpSlider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+JumpSlider.Size = UDim2.new(0, 280, 0, 30)
+JumpSlider.Position = UDim2.new(0, 10, 0, 150)
+JumpSlider.Font = Enum.Font.SourceSans
+JumpSlider.Text = "50"
+JumpSlider.TextColor3 = Color3.fromRGB(0, 0, 0)
+JumpSlider.TextSize = 20
+JumpSlider.ClearTextOnFocus = true
+
+JumpSlider.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        local jump = tonumber(JumpSlider.Text)
+        if jump then
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = jump
+        end
+    end
+end)
+
+-- Set properties for Wall Hack Toggle
+WallHackToggle.Name = "WallHackToggle"
+WallHackToggle.Parent = Tab1
+WallHackToggle.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+WallHackToggle.Size = UDim2.new(0, 280, 0, 50)
+WallHackToggle.Position = UDim2.new(0, 10, 0, 190)
+WallHackToggle.Font = Enum.Font.SourceSans
+WallHackToggle.Text = "Wall Hack: Off"
+WallHackToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+WallHackToggle.TextSize = 20
+
+local wallHackEnabled = false
+WallHackToggle.MouseButton1Click:Connect(function()
+    wallHackEnabled = not wallHackEnabled
+    WallHackToggle.Text = wallHackEnabled and "Wall Hack: On" or "Wall Hack: Off"
+    if wallHackEnabled then
+        _G.WallHack = true
+        while _G.WallHack do
+            for _, v in pairs(game.Workspace:GetDescendants()) do
+                if v:IsA("BasePart") and v.CanCollide then
+                    v.CanCollide = false
+                end
+            end
+            wait()
+        end
+    else
+        _G.WallHack = false
+        for _, v in pairs
+                                         game.Workspace:GetDescendants()) do
+            if v:IsA("BasePart") and not v.CanCollide then
+                v.CanCollide = true
+            end
+        end
+    end
+end)
+
+-- Set properties for Infinite Yield Button
+InfiniteYieldButton.Name = "InfiniteYieldButton"
+InfiniteYieldButton.Parent = Tab2
+InfiniteYieldButton.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+InfiniteYieldButton.Size = UDim2.new(0, 280, 0, 50)
+InfiniteYieldButton.Position = UDim2.new(0, 10, 0, 10)
+InfiniteYieldButton.Font = Enum.Font.SourceSans
+InfiniteYieldButton.Text = "Load Infinite Yield"
+InfiniteYieldButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+InfiniteYieldButton.TextSize = 20
+
+InfiniteYieldButton.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+-- Adjustments for mobile devices
+MainFrame.Size = UDim2.new(0, 350, 0, 400)
+SpeedLabel.Size = UDim2.new(0, 320, 0, 50)
+SpeedSlider.Size = UDim2.new(0, 320, 0, 30)
+JumpLabel.Size = UDim2.new(0, 320, 0, 50)
+JumpSlider.Size = UDim2.new(0, 320, 0, 30)
+WallHackToggle.Size = UDim2.new(0, 320, 0, 50)
+InfiniteYieldButton.Size = UDim2.new(0, 320, 0, 50)
+
+SpeedLabel.Position = UDim2.new(0, 15, 0, 10)
+SpeedSlider.Position = UDim2.new(0, 15, 0, 70)
+JumpLabel.Position = UDim2.new(0, 15, 0, 110)
+JumpSlider.Position = UDim2.new(0, 15, 0, 170)
+WallHackToggle.Position = UDim2.new(0, 15, 0, 210)
+InfiniteYieldButton.Position = UDim2.new(0, 15, 0, 10)
+
+-- Ensure Main Frame is hidden off-screen initially
+MainFrame.Position = UDim2.new(0.5, -175, 1, 0)
+
+-- Ensure initial tab visibility
+Tab1.Visible = true
+Tab2.Visible = false
