@@ -1,0 +1,133 @@
+-- Load Orion UI Library
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+local Window = OrionLib:MakeWindow({Name = "Giggle Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MyConfig"})
+
+-- Key System
+local key = "Giggle"
+local keyInput = ""
+local keyCorrect = false
+
+local KeyTab = Window:MakeTab({
+    Name = "Key System",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+KeyTab:AddTextbox({
+    Name = "Enter Key",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(value)
+        keyInput = value
+        if keyInput == key then
+            keyCorrect = true
+            OrionLib:MakeNotification({
+                Name = "Access Granted",
+                Content = "Correct Key! You now have access.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        else
+            keyCorrect = false
+            OrionLib:MakeNotification({
+                Name = "Access Denied",
+                Content = "Incorrect Key! Try again.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    end
+})
+
+local function checkKey()
+    if not keyCorrect then
+        OrionLib:MakeNotification({
+            Name = "Access Denied",
+            Content = "You must enter the correct key to use this feature.",
+            Image = "rbxassetid://4483345998",
+            Time = 5
+        })
+        return false
+    end
+    return true
+end
+
+-- Main Tab
+local MainTab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+MainTab:AddTextbox({
+    Name = "Walk Speed",
+    Default = "16",
+    TextDisappear = true,
+    Callback = function(value)
+        if checkKey() then
+            local speed = tonumber(value)
+            if speed then
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+            end
+        end
+    end    
+})
+
+MainTab:AddTextbox({
+    Name = "Jump Power",
+    Default = "50",
+    TextDisappear = true,
+    Callback = function(value)
+        if checkKey() then
+            local jump = tonumber(value)
+            if jump then
+                game.Players.LocalPlayer.Character.Humanoid.JumpPower = jump
+            end
+        end
+    end    
+})
+
+MainTab:AddToggle({
+    Name = "Wall Hack",
+    Default = false,
+    Callback = function(state)
+        if checkKey() then
+            if state then
+                _G.WallHack = true
+                while _G.WallHack do
+                    for _, v in pairs(game.Workspace:GetDescendants()) do
+                        if v:IsA("BasePart") and v.CanCollide then
+                            v.CanCollide = false
+                        end
+                    end
+                    wait()
+                end
+            else
+                _G.WallHack = false
+                for _, v in pairs(game.Workspace:GetDescendants()) do
+                    if v:IsA("BasePart") and not v.CanCollide then
+                        v.CanCollide = true
+                    end
+                end
+            end
+        end
+    end    
+})
+
+-- Misc Tab
+local MiscTab = Window:MakeTab({
+    Name = "Misc",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+MiscTab:AddButton({
+    Name = "Load Infinite Yield",
+    Callback = function()
+        if checkKey() then
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        end
+    end    
+})
+
+OrionLib:Init()
