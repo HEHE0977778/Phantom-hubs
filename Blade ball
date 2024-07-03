@@ -116,6 +116,7 @@ KeyTab:AddTextbox({
             })
 
             CreditsTab:AddParagraph("Coded by", "Giggle_worthy")
+  CreditsTab:AddParagraph("Got help by", "Phantom and Hawk")
 
         else
             OrionLib:MakeNotification({
