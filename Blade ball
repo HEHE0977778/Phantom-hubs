@@ -8,7 +8,7 @@ local key = "Giggle702"
 
 -- Create Main Window with Blue Theme
 local Window = OrionLib:MakeWindow({
-    Name = "Phantom HUB | BladeBall",
+    Name = "Phantom HUB | BladeBall☄️",
     HidePremium = false,
     SaveConfig = true,
     ConfigFolder = "Phantombladeball",
