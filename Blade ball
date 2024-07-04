@@ -1,3 +1,5 @@
+-- WARNING: TRYING STEALING SCRIPT COULD LEAD YOU TO A BLACKLIST 
+
 -- Load Orion Library
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
