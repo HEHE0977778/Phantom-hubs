@@ -53,7 +53,7 @@ KeyTab:AddTextbox({
             })
 
             MainTab:AddToggle({
-                Name = "Auto Spin",
+                Name = "Auto Open Sword Crates",
                 Default = false,
                 Callback = function(state)
                     if state then
@@ -65,7 +65,7 @@ KeyTab:AddTextbox({
             })
 
             MainTab:AddToggle({
-                Name = "Auto Trade",
+                Name = "Auto Open Explosion Crates",
                 Default = false,
                 Callback = function(state)
                     if state then
