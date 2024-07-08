@@ -1,0 +1,117 @@
+-- WARNING: TRYING STEALING SCRIPT COULD LEAD YOU TO A BLACKLIST 
+
+-- Load Orion Library
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+-- Create Main Window with Blue Theme
+local Window = OrionLib:MakeWindow({
+    Name = "Phantom HUB |[keyless]BladeBall☄️",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "Phantombladeball",
+    IntroText = "Welcome to Phantom HUB",
+    IntroIcon = "rbxassetid://4483345998",
+    IntroEnabled = true,
+})
+
+-- Main Tab
+local MainTab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+MainTab:AddButton({
+    Name = "Auto Parry",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/r4mpage4/autoparryonly/main/parry.lua"))()
+    end    
+})
+
+MainTab:AddToggle({
+    Name = "Auto Open Sword Crates",
+    Default = false,
+    Callback = function(state)
+        if state then
+            -- Auto Spin Enabled
+        else
+            -- Auto Spin Disabled
+        end
+    end    
+})
+
+MainTab:AddToggle({
+    Name = "Auto Open Explosion Crates",
+    Default = false,
+    Callback = function(state)
+        if state then
+            -- Auto Trade Enabled
+        else
+            -- Auto Trade Disabled
+        end
+    end    
+})
+
+MainTab:AddButton({
+    Name = "ESP",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/yfc35FGN"))()
+    end    
+})
+
+-- Extra Tab
+local ExtraTab = Window:MakeTab({
+    Name = "Extra",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+ExtraTab:AddTextbox({
+    Name = "Speed",
+    Default = "16",
+    TextDisappear = false,
+    Callback = function(value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(value)
+    end    
+})
+
+ExtraTab:AddButton({
+    Name = "Infinity Jumps",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/u9EuU3FE"))()
+    end    
+})
+
+-- Visuals Tab
+local VisualsTab = Window:MakeTab({
+    Name = "Visuals",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+VisualsTab:AddParagraph("Coming soon!", "")
+
+-- Credits Tab
+local CreditsTab = Window:MakeTab({
+    Name = "Credits",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+CreditsTab:AddParagraph("Coded by", "Giggle_worthy")
+CreditsTab:AddParagraph("Got help by", "Phantom and Hawk")
+CreditsTab:AddButton({
+    Name = "Discord",
+    Callback = function()
+        setclipboard("https://discord.com/invite/ZeHAgEQ7pS")
+        OrionLib:MakeNotification({
+            Name = "Discord Link",
+            Content = "Discord link copied to clipboard!",
+            Image = "rbxassetid://4483345998",
+            Time = 5
+        })
+    end    
+})
+
+-- Initialize Orion Library
+OrionLib:Init()
