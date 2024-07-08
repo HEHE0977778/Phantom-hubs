@@ -79,7 +79,7 @@ KeyTab:AddTextbox({
             MainTab:AddButton({
                 Name = "ESP",
                 Callback = function()
-                    loadstring(game:HttpGet(('https://raw.githubusercontent.com/cool83birdcarfly02six/UNIVERSALESPLTX/main/README.md'),true))()
+                    loadstring(game:HttpGet("https://pastebin.com/raw/yfc35FGN"))()
                 end    
             })
 
