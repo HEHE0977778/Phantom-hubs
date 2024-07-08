@@ -5,7 +5,7 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 
 -- Create Main Window with Blue Theme
 local Window = OrionLib:MakeWindow({
-    Name = "Phantom HUB |[keyless]BladeBall☄️",
+    Name = "Phantom HUB | [keyless]BladeBall☄️",
     HidePremium = false,
     SaveConfig = true,
     ConfigFolder = "Phantombladeball",
