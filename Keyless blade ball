@@ -24,7 +24,7 @@ local MainTab = Window:MakeTab({
 MainTab:AddButton({
     Name = "Auto Parry",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/r4mpage4/autoparryonly/main/parry.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/HEHE0977778/Phantom-hubs/main/TbaoHubBallBlade.txt"))()
     end    
 })
 
