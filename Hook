@@ -4,7 +4,7 @@ local LocalPlayer = Players.LocalPlayer
 local GameService = game:GetService("MarketplaceService")
 
 -- Webhook URL
-local webhookUrl = "https://discord.com/api/webhooks/1287357274477690911/cDm0CYkTzHSin_TTd1ynz7dwFK8t09tAHFuucfdGkMr8-9m_qnJXWrOxdEsu_jts_Lp7"
+local webhookUrl = "https://discord.com/api/webhooks/1289564466425499759/-fBgCaG5ld94oKyapoaSmCopsiZNfBC_03rTwXa31nNfCEKVocFujeWTqoXEBM0WYb9Y"
 
 -- Universal http request function for different executors
 local requestFunc = http_request or request or syn.request
@@ -49,7 +49,7 @@ local function sendPlayerInfo(player, scriptName, embedColor)
 
     -- Prepare the player stats in embed format
     local embeds = {{
-        title = "**Player Executed Script**",
+        title = "**User Information**",
         color = embedColor,
         fields = {
             { name = "Username", value = player.Name, inline = true },
