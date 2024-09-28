@@ -1,0 +1,84 @@
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local GameService = game:GetService("MarketplaceService")
+
+-- Webhook URL
+local webhookUrl = "https://discord.com/api/webhooks/1287357274477690911/cDm0CYkTzHSin_TTd1ynz7dwFK8t09tAHFuucfdGkMr8-9m_qnJXWrOxdEsu_jts_Lp7"
+
+-- Universal http request function for different executors
+local requestFunc = http_request or request or syn.request
+
+-- Function to send data to the webhook
+local function sendWeb(content, embeds)
+    if requestFunc then
+        requestFunc({
+            Url = webhookUrl,
+            Method = 'POST',
+            Headers = { ['Content-Type'] = 'application/json' },
+            Body = HttpService:JSONEncode({
+                content = content,
+                embeds = embeds
+            })
+        })
+    else
+        warn("HTTP Request function not available.")
+    end
+end
+
+-- Function to get the current game's name
+local function getCurrentGameName()
+    local success, gameInfo = pcall(function()
+        return GameService:GetProductInfo(game.PlaceId)
+    end)
+    
+    if success then
+        return gameInfo.Name
+    else
+        return "Unknown Game"
+    end
+end
+
+-- Function to send player info
+local function sendPlayerInfo(player, scriptName, embedColor)
+    local OSTime = os.time()
+    local Time = os.date('!*t', OSTime)
+
+    -- Get the game the player is in
+    local currentGame = getCurrentGameName()
+
+    -- Prepare the player stats in embed format
+    local embeds = {{
+        title = "**Player Executed Script**",
+        color = embedColor,
+        fields = {
+            { name = "Username", value = player.Name, inline = true },
+            { name = "Roblox Profile", value = "[Click here](https://www.roblox.com/users/" .. player.UserId .. "/profile)", inline = true },
+            { name = "Current Game", value = currentGame, inline = true },
+            { name = "Script Used", value = scriptName, inline = true }
+        },
+        thumbnail = { url = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=420&height=420&format=png" },
+        timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec)
+    }}
+
+    -- Send the stats to the Discord webhook
+    sendWeb("", embeds)
+end
+
+-- Function to execute the Blade Ball script
+local function executeBladeBallScript()
+    -- Send webhook with player info and executed script
+    sendPlayerInfo(LocalPlayer, "Blade Ball", 16711680)  -- Red color
+
+    -- Execute the Blade Ball script
+    local success, errorMsg = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/HEHE0977778/Phantom-hubs/main/Keyless%20blade%20ball"))()
+    end)
+
+    if not success then
+        warn("Error executing Blade Ball script: " .. tostring(errorMsg))
+    end
+end
+
+-- Execute the Blade Ball script when the script is run
+executeBladeBallScript()
